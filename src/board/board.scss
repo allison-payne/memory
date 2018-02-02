@@ -1,0 +1,11 @@
+@import '../style-utils/mixins';
+
+.board {
+  @include box_shadow(1);
+  background: gray;
+  padding: 5px;
+  .board-row {
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+}

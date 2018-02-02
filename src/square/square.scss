@@ -1,0 +1,50 @@
+@import '../style-utils/mixins';
+
+.square-container {
+  height: 150px;
+  width: 150px;
+  margin: auto;
+  cursor: pointer;
+  perspective: 600px;
+  position: relative;
+  .square {
+    @include box_shadow(4);
+    border: 1px solid #999;
+    font-size: 24px;
+    font-weight: bold;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: all 1s ease-in-out;
+    .side {
+      backface-visibility: hidden;
+      border-radius: 6px;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      overflow: hidden;
+      text-align: center;
+      line-height: 150px;
+      background: #eaeaed;
+      color: #0087cc;
+      &.front {
+        z-index: 1;
+      }
+      &.back {
+        transform: rotateY(180deg);
+      }
+    }
+
+    &:focus {
+      outline: none;
+    }
+    &.flip {
+      transform: rotateY(180deg);
+    }
+    &.matched{
+      @include box_shadow(0);
+      border-color: red;
+    }
+  }
+}

@@ -1,0 +1,18 @@
+@import '../style-utils/mixins';
+
+.game-info {
+  @include box_shadow(4);
+  width: 200px;
+  text-align: left;
+  border: solid 1px black;
+  .status {
+    margin-bottom: 10px;
+    text-align: center;
+    &.winner{
+      color:red;
+    }
+  }
+  ol {
+    list-style-type: none;
+  }
+}
