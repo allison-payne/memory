@@ -28,7 +28,7 @@ export default class Game extends React.Component {
         this.initial_board = _.shuffle(squares);
         this.state = {
             history: [{
-                squares: this.initial_board.map(a => ({...a})),
+                squares: this.initial_board.map(a => ({ ...a })),
             }],
             stepNumber: 0,
             currentlySelected: [],
@@ -36,10 +36,10 @@ export default class Game extends React.Component {
     }
 
     handleClick(i) {
-        const cur_history = this.state.history.slice(0, this.state.stepNumber + 1).map(a => ({...a}));
+        const cur_history = this.state.history.slice(0, this.state.stepNumber + 1).map(a => ({ ...a }));
         const currentlySelected = this.state.currentlySelected.slice();
         const current = cur_history[cur_history.length - 1];
-        const squares = current.squares.map(a => ({...a}));
+        const squares = current.squares.map(a => ({ ...a }));
         const clickedSquare = squares[i];
         if (currentlySelected.length == 2) {
             return;
@@ -64,31 +64,33 @@ export default class Game extends React.Component {
 
     clearHistory() {
         this.setState({
-            history: [{squares: _.shuffle(this.initial_board.map(a => ({...a})))}],
+            history: [{ squares: _.shuffle(this.initial_board.map(a => ({ ...a }))) }],
             stepNumber: 0,
         });
     }
 
     componentDidUpdate() {
-        const cur_history = this.state.history.slice(0, this.state.stepNumber + 1).map(a => ({...a}));
+        const cur_history = this.state.history.slice(0, this.state.stepNumber + 1).map(a => ({ ...a }));
         const squares = cur_history[cur_history.length - 1].squares;
         const currentlySelected = this.state.currentlySelected.slice();
         const square_one = squares[currentlySelected[0]];
         const square_two = squares[currentlySelected[1]];
         if (currentlySelected.length == 2) {
             //Check if matches
-            if (square_one.value === square_two.value) {
-                square_one.matched = true;
-                square_two.matched = true;
-            } else {
-                square_one.flip = false;
-                square_two.flip = false;
-            }
-            const selected = [];
-            this.setState({
-                history: cur_history,
-                currentlySelected: selected,
-            });
+            setTimeout(() => {
+                if (square_one.value === square_two.value) {
+                    square_one.matched = true;
+                    square_two.matched = true;
+                } else {
+                    square_one.flip = false;
+                    square_two.flip = false;
+                }
+                const selected = [];
+                this.setState({
+                    history: cur_history,
+                    currentlySelected: selected,
+                });
+            }, 1000);
         }
     }
 
@@ -124,12 +126,12 @@ export default class Game extends React.Component {
                 <div className="row">
                     <Board
                         squares={current.squares}
-                        /*onClick={(i) => this.handleClick(i)}*/
+                    /*onClick={(i) => this.handleClick(i)}*/
                     />
                     <GameInfo status={status}
-                              moves={moves}
-                              stepNumber={this.state.stepNumber}
-                              onClick={() => this.clearHistory()}
+                        moves={moves}
+                        stepNumber={this.state.stepNumber}
+                        onClick={() => this.clearHistory()}
                     />
                 </div>
             </div>

@@ -26,7 +26,6 @@
     "neutrino": "^7.2.1",
     "neutrino-middleware-sass": "0.0.1",
     "neutrino-middleware-style-loader": "^7.1.10",
-    "neutrino-preset-karma": "^7.1.10",
     "neutrino-preset-react": "^7.1.10",
     "node-sass": "^4.5.3",
     "sass-loader": "^6.0.6",
