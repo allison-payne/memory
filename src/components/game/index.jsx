@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
-import Board from './board/board';
-import GameInfo from './game-info/game-info';
+import Board from '../board';
+import GameInfo from '../game-info';
 
 const alphabet = ['A', 'B', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'M', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
@@ -41,19 +41,21 @@ export default class Game extends React.Component {
         const current = cur_history[cur_history.length - 1];
         const squares = current.squares.map(a => ({ ...a }));
         const clickedSquare = squares[i];
-        if (currentlySelected.length == 2) {
-            return;
+        if (!clickedSquare.flip) {
+            if (currentlySelected.length == 2) {
+                return;
+            }
+            clickedSquare.flip = !clickedSquare.flip;
+            currentlySelected.push(i);
+            cur_history.push({
+                squares: squares,
+            });
+            this.setState({
+                history: cur_history,
+                stepNumber: cur_history.length - 1,
+                currentlySelected: currentlySelected,
+            });
         }
-        clickedSquare.flip = !clickedSquare.flip;
-        currentlySelected.push(i);
-        cur_history.push({
-            squares: squares,
-        });
-        this.setState({
-            history: cur_history,
-            stepNumber: cur_history.length - 1,
-            currentlySelected: currentlySelected,
-        });
     }
 
     jumpTo(step) {
@@ -126,7 +128,6 @@ export default class Game extends React.Component {
                 <div className="row">
                     <Board
                         squares={current.squares}
-                    /*onClick={(i) => this.handleClick(i)}*/
                     />
                     <GameInfo status={status}
                         moves={moves}

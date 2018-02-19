@@ -6,7 +6,7 @@ export default function Square(props) {
             <div className={`square${props.model && props.model.flip ? ' flip' : ''}${props.model && props.model.matched ? ' matched' : ''}`}
                  onClick={props.model && !props.model.matched ? () => {props.model.onClick(props.index)} : () => {return;}}>
                 <div className="side front">
-                    --
+                    <i className="ss-icon">&#x1F440;</i>
                 </div>
                 <div className="side back">
                     {props.model && props.model.value ? props.model.value : 'No Play'}

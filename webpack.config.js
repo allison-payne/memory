@@ -39,6 +39,12 @@ const config = {
         aggregateTimeout: 1000,
         poll: true
     },
+    // RESOLVE
+    resolve: {
+        modules: ['node_modules', SRC_DIR],
+        extensions: ['.js', '.json', '.jsx', '.css', '.scss'],
+        descriptionFiles: ['package.json']
+    },
     // ENTRY
     entry: {
         app: ['babel-polyfill', SRC_APP_JS]
@@ -49,13 +55,6 @@ const config = {
         path: OUTPUT_DIR,
         filename: OUTPUT_JS_BUNDLE_FILE,
         sourceMapFilename: 'sourcemaps/[file].map'
-    },
-
-    // RESOLVE
-    resolve: {
-        modules: ['node_modules', SRC_DIR],
-        extensions: ['.js', '.json', '.jsx', '.css', '.scss'],
-        descriptionFiles: ['package.json']
     },
     // MODULES
     module: {
@@ -71,13 +70,27 @@ const config = {
                 }
             },
             //RULES FOR HTML
-            { test: /\.html$/, use: ['html-loader'] },
+            {
+                test: /\.html$/,
+                use: ['html-loader']
+            },
             // RULES FOR CSS | SCSS
             {
                 test: /\.(css|scss)$/,
                 use: cssExtractor.extract({
-                    use: ['css-loader', 'sass-loader'],
-                    fallback: 'style-loader'
+                    fallback: 'style-loader',
+                    use: [{
+                        loader: 'css-loader',
+                        options: {
+                            url: false,
+                            sourceMap: true
+                        }
+                    }, {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: true
+                        }
+                    }]
                 })
             },
             //RULES FOR IMAGES

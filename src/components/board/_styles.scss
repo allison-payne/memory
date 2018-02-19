@@ -1,4 +1,4 @@
-@import '../style-utils/mixins';
+@import '../../styles/mixins/box-shadow';
 
 .board {
   @include box_shadow(1);

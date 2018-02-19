@@ -1,9 +1,7 @@
 import React from 'react';
 import {render} from 'react-dom';
-import Game from './game';
+import Game from './components/game';
 import './index.scss';
-
-// ========================================
 
 render(
     <Game/>,

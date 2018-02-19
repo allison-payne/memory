@@ -1,4 +1,5 @@
 @import '~milligram-sass';
-@import './square/square.scss';
-@import './board/board.scss';
-@import './game-info/game-info.scss';
+@import './styles/ss-pika/_main';
+@import './components/square/_styles';
+@import './components/board/_styles';
+@import './components/game-info/_styles';

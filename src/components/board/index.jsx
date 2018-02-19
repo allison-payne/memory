@@ -1,12 +1,11 @@
 import React from 'react';
-import Square from '../square/square';
+import Square from '../square';
 
 export default class Board extends React.Component {
     renderSquare(i) {
         return <Square model={this.props.squares[i]}
-                       index={i}/>;
+            index={i} />;
     }
-
     render() {
         return (
             <div className="column">
